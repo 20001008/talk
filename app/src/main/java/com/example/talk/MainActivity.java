@@ -1,10 +1,7 @@
 package com.example.talk;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.ComponentName;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -21,8 +18,8 @@ import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -50,11 +47,13 @@ public class MainActivity extends AppCompatActivity {
        if(Build.VERSION.SDK_INT>=21)
        {
            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-           getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));
+           getWindow().setStatusBarColor(0xffffffff);
        }
         //申请权限
         setContentView(R.layout.activity_main);
-
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setTitle(R.string.app_name);
         zcPromissions(MainActivity.this);
         //注册
         final SQLiteOpenHelper sqLiteOpenHelper = new MyDataSQL(this, "book.db", null, 1);
@@ -130,7 +129,6 @@ public class MainActivity extends AppCompatActivity {
                 ;
             }
         }
-
     }
 
     public String read(String s) {
@@ -162,6 +160,7 @@ public class MainActivity extends AppCompatActivity {
     {
         try {
             for(int n=0;n<=PERMISSSIONS.length;n++) {
+                Log.d(TAG, "zcPromissions: " + Integer.toString(n));
                 Log.d(TAG, "zcPromissions: "+Integer.toString(n));
                 int Permission = ActivityCompat.checkSelfPermission(MainActivity.this, PERMISSSIONS[n]);
                 if (Permission != PackageManager.PERMISSION_GRANTED)
