@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
         //加入对方消息
         mainlist.add(new zylist(MSN_type_dm,"在吗？",false));
-        mainlist.add(new zylist(MSN_type_wf,"什么事？",false));
+        mainlist.add(new zylist(MSN_type_wf, "什么事 ？", false));
         mainlist.add(new zylist(MSN_type_dm,"来我家吃蝙蝠！！！",false));
         zyadapter=new zyadapter(this,mainlist);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL,false));
